@@ -144,9 +144,9 @@ class MACNNMixtureOfExperts(nn.Module):
         return x, n, h, s, a
 
 
-class MixtureOfExpertsFusion1(nn.Module):
+class MACNNMixtureOfExpertsForwardFusion1(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, fusion_level=1):
-        super(MixtureOfExpertsFusion1, self).__init__()
+        super(MACNNMixtureOfExpertsForwardFusion1, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  moe=True,
@@ -193,9 +193,9 @@ class MixtureOfExpertsFusion1(nn.Module):
         return x, n, h, s, a
 
 
-class MixtureOfExpertsFusion2(nn.Module):
+class MACNNMixtureOfExpertsForwardFusion2(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, fusion_level=2):
-        super(MixtureOfExpertsFusion2, self).__init__()
+        super(MACNNMixtureOfExpertsForwardFusion2, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  moe=True,
@@ -251,9 +251,9 @@ class MixtureOfExpertsFusion2(nn.Module):
         return x, n, h, s, a
 
 
-class MixtureOfExpertsFusion3(nn.Module):
+class MACNNMixtureOfExpertsForwardFusion3(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, fusion_level=3):
-        super(MixtureOfExpertsFusion3, self).__init__()
+        super(MACNNMixtureOfExpertsForwardFusion3, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  moe=True,
@@ -319,9 +319,9 @@ class MixtureOfExpertsFusion3(nn.Module):
         return x, n, h, s, a
 
 
-class MixtureOfExpertsFusion4(nn.Module):
+class MACNNMixtureOfExpertsForwardFusion4(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, fusion_level=4):
-        super(MixtureOfExpertsFusion4, self).__init__()
+        super(MACNNMixtureOfExpertsForwardFusion4, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  moe=True,
@@ -394,9 +394,9 @@ class MixtureOfExpertsFusion4(nn.Module):
         return x, n, h, s, a
 
 
-class MixtureOfExpertsFusion5(nn.Module):
+class MACNNMixtureOfExpertsForwardFusion5(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, fusion_level=5):
-        super(MixtureOfExpertsFusion5, self).__init__()
+        super(MACNNMixtureOfExpertsForwardFusion5, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  moe=True,
@@ -476,9 +476,9 @@ class MixtureOfExpertsFusion5(nn.Module):
         return x, n, h, s, a
 
 
-class MixtureOfExpertsFusion6(nn.Module):
+class MACNNMixtureOfExpertsForwardFusion6(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, fusion_level=6):
-        super(MixtureOfExpertsFusion6, self).__init__()
+        super(MACNNMixtureOfExpertsForwardFusion6, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  moe=True,
@@ -598,9 +598,9 @@ class MixtureOfExpertsFusion6(nn.Module):
         return x, n, h, s, a
 
 
-class MixtureOfExpertsReverseFusion7(nn.Module):
+class MACNNMixtureOfExpertsBackwardFusion7(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, num_moe=4):
-        super(MixtureOfExpertsReverseFusion7, self).__init__()
+        super(MACNNMixtureOfExpertsBackwardFusion7, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden)
         self.mod_happy = MACNN(attention_heads=attention_heads,
@@ -629,10 +629,10 @@ class MixtureOfExpertsReverseFusion7(nn.Module):
         return x
 
 
-class MixtureOfExpertsReverseFusion6(nn.Module):
+class MACNNMixtureOfExpertsBackwardFusion6(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64,
                  fusion_level=-6, num_moe=4):
-        super(MixtureOfExpertsReverseFusion6, self).__init__()
+        super(MACNNMixtureOfExpertsBackwardFusion6, self).__init__()
 
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
@@ -709,10 +709,10 @@ class MixtureOfExpertsReverseFusion6(nn.Module):
         return x
 
 
-class MixtureOfExpertsReverseFusion5(nn.Module):
+class MACNNMixtureOfExpertsBackwardFusion5(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64,
                  fusion_level=-5, num_moe=4):
-        super(MixtureOfExpertsReverseFusion5, self).__init__()
+        super(MACNNMixtureOfExpertsBackwardFusion5, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  fusion_level=fusion_level)
@@ -795,10 +795,10 @@ class MixtureOfExpertsReverseFusion5(nn.Module):
         return x
 
 
-class MixtureOfExpertsReverseFusion4(nn.Module):
+class MACNNMixtureOfExpertsBackwardFusion4(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, num_moe=4,
                  fusion_level=-4,):
-        super(MixtureOfExpertsReverseFusion4, self).__init__()
+        super(MACNNMixtureOfExpertsBackwardFusion4, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  fusion_level=fusion_level)
@@ -887,10 +887,10 @@ class MixtureOfExpertsReverseFusion4(nn.Module):
         return x
 
 
-class MixtureOfExpertsReverseFusion3(nn.Module):
+class MACNNMixtureOfExpertsBackwardFusion3(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, num_moe=4,
                  fusion_level=-3):
-        super(MixtureOfExpertsReverseFusion3, self).__init__()
+        super(MACNNMixtureOfExpertsBackwardFusion3, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  fusion_level=fusion_level)
@@ -986,10 +986,10 @@ class MixtureOfExpertsReverseFusion3(nn.Module):
         return x
 
 
-class MixtureOfExpertsReverseFusion2(nn.Module):
+class MACNNMixtureOfExpertsBackwardFusion2(nn.Module):
     def __init__(self, attention_heads=4, attention_hidden=64, num_moe=4,
                  fusion_level=-2):
-        super(MixtureOfExpertsReverseFusion2, self).__init__()
+        super(MACNNMixtureOfExpertsBackwardFusion2, self).__init__()
         self.mod_neutral = MACNN(attention_heads=attention_heads,
                                  attention_hidden=attention_hidden,
                                  fusion_level=fusion_level)

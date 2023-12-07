@@ -255,65 +255,65 @@ def setup_model(config, use_gpu=False):
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN)
             elif config.FUSION_LEVEL == 1:
-                model_train = model.MixtureOfExpertsFusion1(
+                model_train = model.MACNNMixtureOfExpertsForwardFusion1(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL)
             elif config.FUSION_LEVEL == 2:
-                model_train = model.MixtureOfExpertsFusion2(
+                model_train = model.MACNNMixtureOfExpertsForwardFusion2(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL)
             elif config.FUSION_LEVEL == 3:
-                model_train = model.MixtureOfExpertsFusion3(
+                model_train = model.MACNNMixtureOfExpertsForwardFusion3(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL)
             elif config.FUSION_LEVEL == 4:
-                model_train = model.MixtureOfExpertsFusion4(
+                model_train = model.MACNNMixtureOfExpertsForwardFusion4(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL)
             elif config.FUSION_LEVEL == 5:
-                model_train = model.MixtureOfExpertsFusion5(
+                model_train = model.MACNNMixtureOfExpertsForwardFusion5(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL)
             elif config.FUSION_LEVEL == 6:
-                model_train = model.MixtureOfExpertsFusion6(
+                model_train = model.MACNNMixtureOfExpertsForwardFusion6(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL)
             elif config.FUSION_LEVEL == -7:
-                model_train = model.MixtureOfExpertsReverseFusion7(
+                model_train = model.MACNNMixtureOfExpertsBackwardFusion7(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     num_moe=4)
             elif config.FUSION_LEVEL == -6:
-                model_train = model.MixtureOfExpertsReverseFusion6(
+                model_train = model.MACNNMixtureOfExpertsBackwardFusion6(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL,
                     num_moe=4)
             elif config.FUSION_LEVEL == -5:
-                model_train = model.MixtureOfExpertsReverseFusion5(
+                model_train = model.MACNNMixtureOfExpertsBackwardFusion5(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL,
                     num_moe=4)
             elif config.FUSION_LEVEL == -4:
-                model_train = model.MixtureOfExpertsReverseFusion4(
+                model_train = model.MACNNMixtureOfExpertsBackwardFusion4(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL)
             elif config.FUSION_LEVEL == -3:
-                model_train = model.MixtureOfExpertsReverseFusion3(
+                model_train = model.MACNNMixtureOfExpertsBackwardFusion3(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL,
                     num_moe=4)
             elif config.FUSION_LEVEL == -2:
-                model_train = model.MixtureOfExpertsReverseFusion2(
+                model_train = model.MACNNMixtureOfExpertsBackwardFusion2(
                     attention_heads=config.ATTENTION_HEADS,
                     attention_hidden=config.ATTENTION_HIDDEN,
                     fusion_level=config.FUSION_LEVEL,
@@ -467,7 +467,7 @@ def append_scores(config, total_scores_ua, total_scores_wa,
         emos_to_use = list(config.CLASS_DICT)
         if config.FUSION_LEVEL > -1:
             total_scores_ua[emos_to_use[0]].append(
-                best_scores["max_wa"][emos_to_use[0]])
+                best_scores["max_ua"][emos_to_use[0]])
             total_scores_wa[emos_to_use[0]].append(
                 best_scores["max_wa"][emos_to_use[0]])
             total_scores_loss[emos_to_use[0]].append(

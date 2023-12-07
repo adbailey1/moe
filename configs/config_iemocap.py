@@ -28,7 +28,7 @@ CLASS_DICT = {EMOTIONS_TO_USE[e]: i for i, e in enumerate(EMOTIONS_TO_USE)}
 CLASS_DICT_IDX = {CLASS_DICT[j]: j for j in CLASS_DICT}
 
 
-DATABASE_EMO_IDX = {
+DATABASE_IDX_EMO = {
     '01': 'neu',  # neutral
     '02': 'fru',  # frustration
     '03': 'hap',  # happiness
@@ -42,7 +42,7 @@ DATABASE_EMO_IDX = {
     '11': 'xxx'   # no agreement from annotators
 }
 
-IDX_EMO_DATABASE = {DATABASE_EMO_IDX[i]: i for i in DATABASE_EMO_IDX}
+DATABASE_EMO_IDX = {DATABASE_IDX_EMO[i]: i for i in DATABASE_IDX_EMO}
 # 'impro' / 'script' / 'both' NOTE we only consider 'impro' for this work
 SESSION_TYPE = 'impro'
 

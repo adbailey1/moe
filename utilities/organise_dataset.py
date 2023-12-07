@@ -46,7 +46,7 @@ def run_organiser():
                     folder_name = data.replace(f"_{utterance}", "")
                     file_name = data + ".wav"
                     emo = l_split[j + 1]
-                    emo_int = config_iemocap.IDX_EMO_DATABASE[emo]
+                    emo_int = config_iemocap.DATABASE_EMO_IDX[emo]
                     current_wav_file = os.path.join(
                         dataset_path,
                         f"Session{str(session_num)}",
