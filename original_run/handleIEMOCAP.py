@@ -1,5 +1,4 @@
-# Code taken from
-
+# Code taken from https://github.com/lessonxmk/head_fusion
 import glob
 import json
 import os
@@ -11,16 +10,17 @@ LABEL = {
     'sad': '04',  #: 'sad',
     'ang': '05',  #: 'angry',
     'fea': '06',  #: 'fearful',
-    'exc': '07',  #: 'disgust',
+    'exc': '07',  #: 'excited',
     'sur': '08',  #: 'surprised'
     'xxx': '09',  #: 'other'
     'oth': '10',  #: 'other'
+    'dis': '11',  #: 'disgust'
 }
 
 
-PATH_TXT = glob.glob("/home/andrew/Data/Datasets/IEMOCAP_FINAL"
+PATH_TXT = glob.glob("/path/to/IEMOCAP"
                      "/IEMOCAP_full_release/*/dialog/EmoEvaluation/S*.txt")
-PATH_WAV = glob.glob("/home/andrew/Data/Datasets/IEMOCAP_FINAL"
+PATH_WAV = glob.glob("/path/to/IEMOCAP"
                      "/IEMOCAP_full_release/*/sentences/wav/*/S*.wav")
 
 PAIR = {}
@@ -31,16 +31,16 @@ def getPair():
         with open(path, 'r') as f:
             fr = f.read().split("\t")
             for i in range(len(fr)):
-                if (fr[i] in LABEL):
+                if fr[i] in LABEL:
                     PAIR[fr[i - 1]] = fr[i]
 
 
 def rename():
     for i in PATH_WAV:
         for j in PAIR:
-            if (os.path.basename(i)[:-4] == j):
+            if os.path.basename(i)[:-4] == j:
                 k = j.split('_')
-                if (len(k) == 3):
+                if len(k) == 3:
                     name = os.path.dirname(i) + '/' + k[0] + '-' + k[1] + '-' + LABEL[PAIR[j]] + '-01-' + k[2] + '.wav'
                     os.rename(src=i, dst=name)
                     print(name)
@@ -51,10 +51,9 @@ def rename():
                     k[2]:F000
                     Ses01F-impro01-XX-01-F000.wav
                     '''
-                elif (len(k) == 4):
+                elif len(k) == 4:
                     name = os.path.dirname(i) + '/' + k[0] + '-' + k[1] + '-' + LABEL[PAIR[j]] + '-01-' + k[2] + '_' + \
-                           k[
-                               3] + '.wav'
+                           k[3] + '.wav'
                     os.rename(src=i, dst=name)
                     print(name)
                     '''
@@ -68,9 +67,8 @@ def rename():
 
 
 if __name__ == '__main__':
-    pairPath = "/home/andrew/Data/Datasets/IEMOCAP_FINAL" \
-               "/IEMOCAP_full_release/pair.json"
-    if (os.path.exists(pairPath)):
+    pairPath = "/path/to/IEMOCAP/IEMOCAP_full_release/pair.json"
+    if os.path.exists(pairPath):
         with open(pairPath, 'r') as f:
             PAIR = json.load(f)
     else:
@@ -78,6 +76,3 @@ if __name__ == '__main__':
         with open(pairPath, 'w') as f:
             json.dump(obj=PAIR, fp=f)
     rename()
-
-
-

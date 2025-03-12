@@ -1,5 +1,4 @@
-# Code taken from
-# Adapted slightly to include models from my paper
+# Code taken from https://github.com/lessonxmk/head_fusion
 
 import torch
 import torch.nn as nn

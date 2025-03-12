@@ -1,60 +1,73 @@
-import glob
 import os
 
+import torch
+import glob
 
-FEATURE_LOC = "/home/andrew/Data/IEMOCAP/"
-SAVE_LOC = "/home/andrew/Data/IEMOCAP/MoE/"
-DATASET_PATH = "/home/andrew/Data/Datasets/IEMOCAP_stripped"
+DATASET_PATH = "/path/to/Datasets/"
+FEATURE_LOC = "/path/to/features/"
+SAVE_LOC = "/path/to/save/location"
 WAV_PATH = glob.glob(
     os.path.join(DATASET_PATH,
                  "IEMOCAP_full_release/*/sentences/wav/*/S*.wav"))
 
 
+def get_num_speakers(speaker_ind):
+    if speaker_ind:
+        NUM_SPEAKERS = 5
+    elif not speaker_ind:
+        NUM_SPEAKERS = 10
+    return NUM_SPEAKERS
+
+CLASS_DICT = {
+    'neutral': torch.Tensor([0]),
+    'happy': torch.Tensor([1]),
+    'sad': torch.Tensor([2]),
+    'angry': torch.Tensor([3]),
+}
+LABEL_NUM = {
+    'neutral': 0,
+    'happy': 0,
+    'sad': 0,
+    'angry': 0,
+}
+
 EMOTIONS_TO_USE = {
     '01': 'neutral',
     # '02': 'frustration',
-    # '03': 'happiness',
-    '04': 'excited',
-    '05': 'sadness',
-    '06': 'angry',
-    # '07': 'fear',
-    # '08': 'surprise',
-    # '09': 'disgust',
-    # '10': 'other',
-    # '11': 'xxx'
+    # '03': 'happy',
+    '04': 'sad',
+    '05': 'angry',
+    # '06': 'fearful',
+    '07': 'happy',  # excitement->happy
+    # '08': 'surprised'
 }
 
-CLASS_DICT = {EMOTIONS_TO_USE[e]: i for i, e in enumerate(EMOTIONS_TO_USE)}
-CLASS_DICT_IDX = {CLASS_DICT[j]: j for j in CLASS_DICT}
+TOLERANCES = {"angry": {"v": [1, 3],
+                        "a": [4, 5]},
+              "happy": {"v": [4, 5],
+                        "a": [3, 5]},
+              "neutral": {"v": [2, 4],
+                          "a": [2, 4]},
+              "sad": {"v": [1, 2],
+                      "a": [1, 5]}}
 
-
-DATABASE_IDX_EMO = {
-    '01': 'neu',  # neutral
-    '02': 'fru',  # frustration
-    '03': 'hap',  # happiness
-    '04': 'exc',  # excited
-    '05': 'sad',  # sadness
-    '06': 'ang',  # angry
-    '07': 'fea',  # fear
-    '08': 'sur',  # surprise
-    '09': 'dis',  # disgust
-    '10': 'oth',  # other
-    '11': 'xxx'   # no agreement from annotators
-}
-
-DATABASE_EMO_IDX = {DATABASE_IDX_EMO[i]: i for i in DATABASE_IDX_EMO}
-# 'impro' / 'script' / 'both' NOTE we only consider 'impro' for this work
-SESSION_TYPE = 'impro'
+impro_or_script = 'impro'
 
 
 def get_feature_file_name(FEATURES_TO_USE):
-    FOLD_FILENAME = f"{FEATURES_TO_USE}_{SESSION_TYPE}.pkl"
+    FEATURESFILENAME = f"features_{FEATURES_TO_USE}_" \
+                       f"{impro_or_script}.pkl"
 
     if "03" in EMOTIONS_TO_USE and "07" in EMOTIONS_TO_USE:
-        FOLD_FILENAME = FOLD_FILENAME.replace(".pkl", "_hapexc.pkl")
+        FEATURESFILENAME = FEATURESFILENAME.replace(".pkl",
+                                                    "_hapexc.pkl")
     elif "03" in EMOTIONS_TO_USE:
-        FOLD_FILENAME = FOLD_FILENAME.replace(".pkl", "_hap.pkl")
+        FEATURESFILENAME = FEATURESFILENAME.replace(".pkl",
+                                                    "_hap.pkl")
     elif "07" in EMOTIONS_TO_USE:
-        FOLD_FILENAME = FOLD_FILENAME.replace(".pkl", "_exc.pkl")
+        FEATURESFILENAME = FEATURESFILENAME.replace(".pkl",
+                                                    "_exc.pkl")
 
-    return FOLD_FILENAME
+    return FEATURESFILENAME
+
+EMO_THRESHOLD = None

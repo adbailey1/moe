@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-FILES_PATH='/home/andrew/PycharmProjects/moe/original_run'
-PYTHON_ENV='/home/andrew/miniconda3/envs/cuda11/bin/python3.8'
+FILES_PATH='/path/to/code'
+PYTHON_ENV='/path/to/python3.8'
 
 PTH=${FILES_PATH}/"handleIEMOCAP.py"
 echo "$PTH"

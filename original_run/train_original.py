@@ -1,4 +1,4 @@
-# Code taken from
+# Code taken from https://github.com/lessonxmk/head_fusion
 # Adapted slightly to run out of the box and to iterate over 5 seeds as
 # referenced in the paper
 import glob
@@ -39,8 +39,8 @@ def count_parameters(mod):
 
 # Code adapted for ease of running
 seeds = [111111, 123456, 0, 999999, 987654]
-WAV_PATH = "/home/andrew/Data/Datasets/IEMOCAP_FINAL/"
-CODE_DIR = "/home/andrew/PycharmProjects/moe/original_run"
+WAV_PATH = "/path/to/wav"
+CODE_DIR = "/path/to/code"
 net_type = "macnn"  # macnn / maccn_x4 / moe
 impro_or_script = 'impro'  # We only consider improvised scripts for this work
 
@@ -99,7 +99,10 @@ def process_data(path, t=2, train_overlap=1, val_overlap=1.6, RATE=16000):
             continue
         label = LABEL_DICT1[label]
 
+        # ToDo This has stopped working: fixed by scipy.io
         wav_data, _ = librosa.load(wav_file, sr=RATE)
+        # from scipy.io import wavfile
+        # _, wav_data = wavfile.read(wav_file)
         X1 = []
         y1 = []
         index = 0
@@ -141,7 +144,10 @@ def process_data(path, t=2, train_overlap=1, val_overlap=1.6, RATE=16000):
         if (impro_or_script != 'all' and (impro_or_script not in wav_file)):
             continue
         label = LABEL_DICT1[label]
-        wav_data, _ = librosa.load(wav_file, sr=RATE)
+        # ToDo This has stopped working: fixed by scipy.io
+        # wav_data, _ = librosa.load(wav_file, sr=RATE)
+        from scipy.io import wavfile
+        _, wav_data = wavfile.read(wav_file)
         X1 = []
         y1 = []
         index = 0
@@ -396,6 +402,5 @@ if __name__ == '__main__':
                 logging.info('Acc: {:.6f}\nUA:{},{}\nmaxWA:{},maxUA{}'.format(WA, UA, sum(UA) / 4, maxWA, maxUA))
                 print(matrix)
                 logging.info(matrix)
-        with open(f"/home/andrew//PycharmProjects/moe/original_run/text_out"
-                  f"/{seed}.txt", "w") as f:
+        with open(f"/path/to/code/{seed}.txt", "w") as f:
             f.write(f"maxUA: {maxUA}, maxWA: {maxWA}")
